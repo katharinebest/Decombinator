@@ -2328,10 +2328,22 @@ else:
     rc=False
 
 import os
+import platform
 currentpath = os.getcwd()
-newpath = currentpath+'\\Results_'+str(name_results)+'\\'
-if not os.path.exists(newpath):
-    os.makedirs(newpath)
+
+if platform.system() == 'Windows':
+    newpath = currentpath+'\\Results_'+str(name_results)+'\\' ## Ensure correct for specified platform
+    if not os.path.exists(newpath):
+        os.makedirs(newpath)
+elif platform.system() == 'Linux':
+    newpath = currentpath+'/Results_'+str(name_results)+'/' ## Ensure correct for specified platform
+    if not os.path.exists(newpath):
+        os.makedirs(newpath)
+elif platform.system() == 'Darwin':
+    newpath = currentpath+'/Results_'+str(name_results)+'/' ## Ensure correct for specified platform
+    if not os.path.exists(newpath):
+        os.makedirs(newpath)
+
 
 try:
     analysis( [str(choose_file)], newpath+str(name_results), str(chain), with_statistics=True, with_reverse_complement_search=rc, omitN=True)
