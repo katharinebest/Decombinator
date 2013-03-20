@@ -2296,8 +2296,9 @@ def plot_insert_lengths( handle, savefilename="InsertLengths" ):
 
 
 ## Adaptation for running as an interactive command-line tool
+version = 'DeCombinatoR v1.1'
     
-print 'Welcome to DeCombinatoR v1.0, written and maintained by: -'
+print 'Welcome to ',version', written and maintained by: -'
 
 print 'Niclas Thomas'
 print 'James Heather'
@@ -2307,7 +2308,7 @@ print 'Benny Chain'
 print ''
 print 'For any questions/comments, please email niclas.thomas@gmail.com'
 print ''
-choose_file = raw_input('Enter path to the you wish to analyse. For example, enter C:/Users/Name/Desktop/MySequences.fastq: ')
+choose_file = raw_input('Enter path to the file you wish to analyse. For example, enter C:/Users/Name/Desktop/MySequences.fastq: ')
 
 correctpath = False
 while correctpath == False:
@@ -2348,7 +2349,7 @@ elif platform.system() == 'Darwin':
 try:
     analysis( [str(choose_file)], newpath+str(name_results), str(chain), with_statistics=True, with_reverse_complement_search=rc, omitN=True)
 except:
-    print 'Decombinator-v1.0 encountered an unexpected error while plotting your results.'
+    print version,' encountered an unexpected error while plotting your results.'
     print 'If the problem persists, please contact niclas.thomas@gmail.com'
 
 seqs_found = 0
@@ -2358,7 +2359,7 @@ for line in seqcheck:
 seqcheck.close()
 
 if seqs_found == 0:
-    print 'Decombinator-v1.0 could not find any TcR',chain,'sequences in the specified file.'
+    print version,' could not find any TcR',chain,'sequences in the specified file.'
 else:
     choose_plots = raw_input('Would you like to plot the results of your analysis? Enter (y/n): ')
 
@@ -2377,7 +2378,7 @@ else:
             print newpath
             print ''
         except:
-            print 'Decombinator-v1.0 encountered an unexpected error while plotting your results.'
+            print version,' encountered an unexpected error while plotting your results.'
             print 'If the problem persists, please contact niclas.thomas@gmail.com'
 
     choose_extras = raw_input('Would you like to use the extra functionality of DeCombinatoR to create additional files containing distinct clones and translated TcR sequences. Enter (y/n): ')
@@ -2410,7 +2411,7 @@ else:
             print newpath
             print ''
         except:
-            print 'Decombinator-v1.0 encountered an unexpected error while using its extra functionality.'
+            print version,' encountered an unexpected error while using its extra functionality.'
             print 'If the problem persists, please contact niclas.thomas@gmail.com'
         
 raw_input('Press Enter to exit...')
