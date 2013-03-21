@@ -3,6 +3,12 @@ sequences using a finite state machine
 
 Niclas Thomas, James Heather, Wilfred Ndifon, John Shawe-Taylor, Benny Chain.
 
+*****************************************************************************
+PLEASE SEE www.ucl.ac.uk/innate2adaptive/software FOR AN EXECUTABLE VERSION
+OF DECOMBINATOR, WITH NO NEED TO DOWNLOAD AND INSTALL ALL DEPENDENCIES LISTED
+BELOW.
+*****************************************************************************
+
 Introduction
 ############
 
@@ -40,36 +46,11 @@ www.ucl.ac.uk/innate2adaptive/software for a comprehensive set of instructions o
 
 Once these modules have been successfully installed, Decombinator can be run
 using Python from the command prompt (assuming Python has already been added
-to your PATH, and that the downloaded folder Decombinator is located on your desktop) via, for example:-
+to your PATH using: -
 
-cd C:\Users\...\Desktop\Decombinator
-python
-import Decombinator
-sequencereads = ["mysequences.fastq"]
-Decombinator.analysis( sequencereads )
+cd location/of/decombinator-master/folder/on/your/system
+python decombinator-v1.1.py
 
-#############
-Further functionality is obtained by then using:-
+It is then simply a case of following the instructions given on screen.
 
-Decombinator.plot_v_usage(handle=open("DecombinatorResults.txt","rU"),order="frequency")
-Decombinator.plot_j_usage(handle=open("DecombinatorResults.txt","rU"),order="frequency")
-Decombinator.plot_del_v(handle=open("DecombinatorResults.txt","rU"))
-Decombinator.plot_del_j(handle=open("DecombinatorResults.txt","rU"))
-Decombinator.plot_vj_joint_dist(handle=open("DecombinatorResults.txt","rU"))
-Decombinator.plot_insert_lengths(handle=open("DecombinatorResults.txt","rU"))
-
-*plot_v_usage and plot_j_usage have additional option:-
-order="chromosome" # Plots V or J usage according to chromosome position
-
-#############
-Two further functions exist:-
-
-Decombinator.get_distinct_clones(handle=open("DecombinatorResults.txt","rU"),with_count=False)
-Decombinator.get_translated_sequences(handle=open("DecombinatorResults.txt","rU"),chain="beta",with_outframe=False,fullaaseq=False)
-
-*option for get_distinct_clones() -
-with_count=True # Includes the count of each distinct clone when writing classifiers to .txt file
-*options for get_translated_seqeuences() -
-chain="alpha" # when analysing alpha sequences
-with_outframe=True # includes out of frame trascripts when writing to file
-fullaaseq=True # includes the full translated sequence (CDR1, CDR2 and CDR3) when writing to file.
+Please email niclas.thomas@gmail.com to report bugs/for help in installtion or usage.
