@@ -2307,7 +2307,10 @@ print 'Benny Chain'
 print ''
 print 'For any questions/comments, please email niclas.thomas@gmail.com'
 print ''
+
+filestoanalyse = []
 choose_file = raw_input('Enter path to the file you wish to analyse. For example, enter C:/Users/Name/Desktop/MySequences.fastq: ')
+addfiles = True
 
 correctpath = False
 while correctpath == False:
@@ -2315,8 +2318,25 @@ while correctpath == False:
         testopen = open(str(choose_file),"rU")
         testopen.close()
         correctpath = True
+        filestoanalyse.append(choose_file)
     except:
         choose_file = raw_input('Cannot find the file you specified. Please enter the correct path: ')
+
+while addfiles == True:
+    morefiles = raw_input('Would you like to include any more files in the analysis? Enter (y/n): ')
+    if morefiles == 'y':
+        choose_file = raw_input('Enter path to an additional file you wish to include: ')
+        correctpath = False
+        while correctpath == False:
+            try:
+                testopen = open(str(choose_file),"rU")
+                testopen.close()
+                correctpath = True
+                filestoanalyse.append(choose_file)
+            except:
+                choose_file = raw_input('Cannot find the file you specified. Please enter the correct path: ')
+    else:
+        addfiles = False
         
 chain = raw_input('Enter the TcR chain you wish to look for. Enter (alpha/beta/gamma/delta): ')
 rc_search = raw_input('Do you wish to search for reverse complement TcR sequences? Enter (y/n): ')
@@ -2346,7 +2366,7 @@ elif platform.system() == 'Darwin':
 
 
 try:
-    analysis( [str(choose_file)], newpath+str(name_results), str(chain), with_statistics=True, with_reverse_complement_search=rc, omitN=True)
+    analysis( filestoanalyse, newpath+str(name_results), str(chain), with_statistics=True, with_reverse_complement_search=rc, omitN=True)
 except:
     print 'DeCombinatoR v1.1 encountered an unexpected error while plotting your results.'
     print 'If the problem persists, please contact niclas.thomas@gmail.com'
@@ -2386,7 +2406,7 @@ else:
         try:   
             choose_outframe = raw_input('Would you like to include out-of-frame TcR sequences in the file of translated TcR sequences? Enter (y/n): ')
             choose_fullaaseq = raw_input('Would you like to translate the full TcR sequence or just the CDR3 region? Enter (full/cdr3): ')
-            choose_count = raw_input('Would you like to include the frequency of each distinct clone in the file of distinct clones? Enter (y/n): ')
+            choose_count = raw_input('Would you like to include the frequency of each distinct clone in the file of distinct clones? Note, to plot the features of distinct clones, you must select (n). Enter (y/n): ')
 
             if str(choose_outframe) == 'y':
                 of=True
@@ -2409,6 +2429,21 @@ else:
             print ''
             print newpath
             print ''
+
+            if choose_count == 'n':
+                
+                print 'Plotting features of the distinct clones...'
+                plot_v_usage(open(newpath+str('distinct_clones')+'.txt', "rU"), chain=str(chain), savefilename = newpath+str(name_results)+'distinctclones_Vusage', order=str(choose_style))
+                plot_j_usage(open(newpath+str('distinct_clones')+'.txt', "rU"), chain=str(chain), savefilename = newpath+str(name_results)+'distinctclones_Jusage', order=str(choose_style))
+                plot_del_v(open(newpath+str('distinct_clones')+'.txt', "rU"), savefilename = newpath+str(name_results)+'distinctclones_Vdels')
+                plot_del_j(open(newpath+str('distinct_clones')+'.txt', "rU"), savefilename = newpath+str(name_results)+'distinctclones_Jdels')
+                plot_vj_joint_dist(open(newpath+str('distinct_clones')+'.txt', "rU"), chain=str(chain), savefilename = newpath+str(name_results)+'distinctclones_VJusage')
+                plot_insert_lengths(open(newpath+str('distinct_clones')+'.txt', "rU"), savefilename = newpath+str(name_results)+'distinctclones_InsertLengths')
+                print 'All plots successfully saved to: -'
+                print ''
+                print newpath
+                print ''
+
         except:
             print 'DeCombinatoR v1.1 encountered an unexpected error while using its extra functionality.'
             print 'If the problem persists, please contact niclas.thomas@gmail.com'
