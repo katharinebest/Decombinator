@@ -150,7 +150,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                             for k in indices:
                                 if len(j_seqs[k]) == len(str(record.seq)[hold_j1[i][1]:hold_j1[i][1]+len(j_seqs[half1_j_seqs.index(hold_j1[i][0])])]):
                                     if lev.hamming( j_seqs[k], str(record.seq)[hold_j1[i][1]:hold_j1[i][1]+len(j_seqs[k])] ) <= 1:
-                                        j_match = half1_j_seqs.index(hold_j1[i][0])
+                                        j_match = k
                                         temp_start_j = hold_j1[i][1] - jump_to_start_j[j_match] # Finds where the start of a full J would be
                                         found_j_match += 1
                         for i in range(len(hold_j2)):
@@ -158,7 +158,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                             for k in indices:
                                 if len(j_seqs[k]) == len(str(record.seq)[hold_j2[i][1]-j_half_split:hold_j2[i][1]-j_half_split+len(j_seqs[half2_j_seqs.index(hold_j2[i][0])])]):
                                     if lev.hamming( j_seqs[k], str(record.seq)[hold_j2[i][1]-j_half_split:hold_j2[i][1]+len(j_seqs[k])-j_half_split] ) <= 1:
-                                        j_match = half2_j_seqs.index(hold_j2[i][0])
+                                        j_match = k
                                         temp_start_j = hold_j2[i][1] - jump_to_start_j[j_match] - j_half_split # Finds where the start of a full J would be
                                         found_j_match += 1
 
@@ -240,7 +240,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                                 for k in indices:
                                     if len(j_seqs[k]) == len(str(record_reverse.seq)[hold_j1[i][1]:hold_j1[i][1]+len(j_seqs[half1_j_seqs.index(hold_j1[i][0])])]):
                                         if lev.hamming( j_seqs[k], str(record_reverse.seq)[hold_j1[i][1]:hold_j1[i][1]+len(j_seqs[k])] ) <= 1:
-                                            j_match = half1_j_seqs.index(hold_j1[i][0])
+                                            j_match = k
                                             temp_start_j = hold_j1[i][1] - jump_to_start_j[j_match] # Finds where the start of a full J would be
                                             found_j_match += 1
                             for i in range(len(hold_j2)):
@@ -248,7 +248,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                                 for k in indices:
                                     if len(j_seqs[k]) == len(str(record_reverse.seq)[hold_j2[i][1]-j_half_split:hold_j2[i][1]-j_half_split+len(j_seqs[half2_j_seqs.index(hold_j2[i][0])])]):
                                         if lev.hamming( j_seqs[k], str(record_reverse.seq)[hold_j2[i][1]-j_half_split:hold_j2[i][1]+len(j_seqs[k])-j_half_split] ) <= 1:
-                                            j_match = half2_j_seqs.index(hold_j2[i][0])
+                                            j_match = k
                                             temp_start_j = hold_j2[i][1] - jump_to_start_j[j_match] - j_half_split # Finds where the start of a full J would be
                                             found_j_match += 1
 
@@ -420,7 +420,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                             for k in indices:
                                 if len(j_seqs[k]) == len(str(record.seq)[hold_j1[i][1]:hold_j1[i][1]+len(j_seqs[half1_j_seqs.index(hold_j1[i][0])])]):
                                     if lev.hamming( j_seqs[k], str(record.seq)[hold_j1[i][1]:hold_j1[i][1]+len(j_seqs[k])] ) <= 1:
-                                        j_match = half1_j_seqs.index(hold_j1[i][0])
+                                        j_match = k
                                         temp_start_j = hold_j1[i][1] - jump_to_start_j[j_match] # Finds where the start of a full J would be
                                         found_j_match += 1
                         for i in range(len(hold_j2)):
@@ -428,7 +428,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                             for k in indices:
                                 if len(j_seqs[k]) == len(str(record.seq)[hold_j2[i][1]-j_half_split:hold_j2[i][1]+len(j_seqs[half2_j_seqs.index(hold_j2[i][0])])-j_half_split]):
                                     if lev.hamming( j_seqs[k], str(record.seq)[hold_j2[i][1]-j_half_split:hold_j2[i][1]+len(j_seqs[k])-j_half_split] ) <= 1:
-                                        j_match = half2_j_seqs.index(hold_j2[i][0])
+                                        j_match = k
                                         temp_start_j = hold_j2[i][1] - jump_to_start_j[j_match] - j_half_split # Finds where the start of a full J would be
                                         found_j_match += 1
 
@@ -511,7 +511,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                                 for k in indices:
                                     if len(j_seqs[k]) == len(str(record_reverse.seq)[hold_j1[i][1]:hold_j1[i][1]+len(j_seqs[half1_j_seqs.index(hold_j1[i][0])])]):
                                         if lev.hamming( j_seqs[k], str(record_reverse.seq)[hold_j1[i][1]:hold_j1[i][1]+len(j_seqs[k])] ) <= 1:
-                                            j_match = half1_j_seqs.index(hold_j1[i][0])
+                                            j_match = k
                                             temp_start_j = hold_j1[i][1] - jump_to_start_j[j_match] # Finds where the start of a full J would be
                                             found_j_match += 1
                             for i in range(len(hold_j2)):
@@ -519,7 +519,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                                 for k in indices:
                                     if len(j_seqs[k]) == len(str(record_reverse.seq)[hold_j2[i][1]-j_half_split:hold_j2[i][1]+len(j_seqs[half2_j_seqs.index(hold_j2[i][0])])-j_half_split]):
                                         if lev.hamming( j_seqs[k], str(record_reverse.seq)[hold_j2[i][1]-j_half_split:hold_j2[i][1]+len(j_seqs[k])-j_half_split] ) <= 1:
-                                            j_match = half2_j_seqs.index(hold_j2[i][0])
+                                            j_match = k
                                             temp_start_j = hold_j2[i][1] - jump_to_start_j[j_match] - j_half_split # Finds where the start of a full J would be
                                             found_j_match += 1
 
@@ -691,7 +691,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                             for k in indices:
                                 if len(j_seqs[k]) == len(str(record.seq)[hold_j1[i][1]:hold_j1[i][1]+len(j_seqs[half1_j_seqs.index(hold_j1[i][0])])]):
                                     if lev.hamming( j_seqs[k], str(record.seq)[hold_j1[i][1]:hold_j1[i][1]+len(j_seqs[k])] ) <= 1:
-                                        j_match = half1_j_seqs.index(hold_j1[i][0])
+                                        j_match = k
                                         temp_start_j = hold_j1[i][1] - jump_to_start_j[j_match] # Finds where the start of a full J would be
                                         found_j_match += 1
                         for i in range(len(hold_j2)):
@@ -699,7 +699,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                             for k in indices:
                                 if len(j_seqs[k]) == len(str(record.seq)[hold_j2[i][1]-j_half_split:hold_j2[i][1]+len(j_seqs[half2_j_seqs.index(hold_j2[i][0])])-j_half_split]):
                                     if lev.hamming( j_seqs[k], str(record.seq)[hold_j2[i][1]-j_half_split:hold_j2[i][1]+len(j_seqs[k])-j_half_split] ) <= 1:
-                                        j_match = half2_j_seqs.index(hold_j2[i][0])
+                                        j_match = k
                                         temp_start_j = hold_j2[i][1] - jump_to_start_j[j_match] - j_half_split # Finds where the start of a full J would be
                                         found_j_match += 1
 
@@ -782,7 +782,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                                 for k in indices:
                                     if len(j_seqs[k]) == len(str(record_reverse.seq)[hold_j1[i][1]:hold_j1[i][1]+len(j_seqs[half1_j_seqs.index(hold_j1[i][0])])]):
                                         if lev.hamming( j_seqs[k], str(record_reverse.seq)[hold_j1[i][1]:hold_j1[i][1]+len(j_seqs[k])] ) <= 1:
-                                            j_match = half1_j_seqs.index(hold_j1[i][0])
+                                            j_match = k
                                             temp_start_j = hold_j1[i][1] - jump_to_start_j[j_match] # Finds where the start of a full J would be
                                             found_j_match += 1
                             for i in range(len(hold_j2)):
@@ -790,7 +790,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                                 for k in indices:
                                     if len(j_seqs[k]) == len(str(record_reverse.seq)[hold_j2[i][1]-j_half_split:hold_j2[i][1]+len(j_seqs[half2_j_seqs.index(hold_j2[i][0])])-j_half_split]):
                                         if lev.hamming( j_seqs[k], str(record_reverse.seq)[hold_j2[i][1]-j_half_split:hold_j2[i][1]+len(j_seqs[k])-j_half_split] ) <= 1:
-                                            j_match = half2_j_seqs.index(hold_j2[i][0])
+                                            j_match = k
                                             temp_start_j = hold_j2[i][1] - jump_to_start_j[j_match] - j_half_split # Finds where the start of a full J would be
                                             found_j_match += 1
 
@@ -962,7 +962,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                             for k in indices:
                                 if len(j_seqs[k]) == len(str(record.seq)[hold_j1[i][1]:hold_j1[i][1]+len(j_seqs[half1_j_seqs.index(hold_j1[i][0])])]):
                                     if lev.hamming( j_seqs[k], str(record.seq)[hold_j1[i][1]:hold_j1[i][1]+len(j_seqs[k])] ) <= 1:
-                                        j_match = half1_j_seqs.index(hold_j1[i][0])
+                                        j_match = k
                                         temp_start_j = hold_j1[i][1] - jump_to_start_j[j_match] # Finds where the start of a full J would be
                                         found_j_match += 1
                         for i in range(len(hold_j2)):
@@ -970,7 +970,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                             for k in indices:
                                 if len(j_seqs[k]) == len(str(record.seq)[hold_j2[i][1]-j_half_split:hold_j2[i][1]+len(j_seqs[half2_j_seqs.index(hold_j2[i][0])])-j_half_split]):
                                     if lev.hamming( j_seqs[k], str(record.seq)[hold_j2[i][1]-j_half_split:hold_j2[i][1]+len(j_seqs[k])-j_half_split] ) <= 1:
-                                        j_match = half2_j_seqs.index(hold_j2[i][0])
+                                        j_match = k
                                         temp_start_j = hold_j2[i][1] - jump_to_start_j[j_match] - j_half_split # Finds where the start of a full J would be
                                         found_j_match += 1
 
@@ -1054,7 +1054,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                                 for k in indices:
                                     if len(j_seqs[k]) == len(str(record_reverse.seq)[hold_j1[i][1]:hold_j1[i][1]+len(j_seqs[half1_j_seqs.index(hold_j1[i][0])])]):
                                         if lev.hamming( j_seqs[k], str(record_reverse.seq)[hold_j1[i][1]:hold_j1[i][1]+len(j_seqs[k])] ) <= 1:
-                                            j_match = half1_j_seqs.index(hold_j1[i][0])
+                                            j_match = k
                                             temp_start_j = hold_j1[i][1] - jump_to_start_j[j_match] # Finds where the start of a full J would be
                                             found_j_match += 1
                             for i in range(len(hold_j2)):
@@ -1062,7 +1062,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                                 for k in indices:
                                     if len(j_seqs[k]) == len(str(record_reverse.seq)[hold_j2[i][1]-j_half_split:hold_j2[i][1]+len(j_seqs[half2_j_seqs.index(hold_j2[i][0])])-j_half_split]):
                                         if lev.hamming( j_seqs[k], str(record_reverse.seq)[hold_j2[i][1]-j_half_split:hold_j2[i][1]+len(j_seqs[k])-j_half_split] ) <= 1:
-                                            j_match = half2_j_seqs.index(hold_j2[i][0])
+                                            j_match = k
                                             temp_start_j = hold_j2[i][1] - jump_to_start_j[j_match] - j_half_split # Finds where the start of a full J would be
                                             found_j_match += 1
 
@@ -1100,7 +1100,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
     if with_statistics == True:
         timed = time() - t0
         print seq_count, 'sequences were analysed'
-        print assigned_count, ' sequences were successfully assigned'
+        print assigned_count, 'sequences were successfully assigned'
         if omitN==True:
             print Nseqs, 'sequences contained ambiguous N nucleotides'
         print 'Time taken =', timed, 'seconds'
@@ -1537,8 +1537,8 @@ def plot_v_usage( handle, chain, savefilename="Vusage", order="frequency"):
             ax.set_ylabel('Frequency', fontsize = 8)
             ax.set_xticks(ind+1*width)
             ax.set_xticklabels(gene_list_v)
-            plt.setp(ax.get_xticklabels(),rotation='vertical',fontsize = 8)
-            plt.setp(ax.get_yticklabels(),rotation='horizontal',fontsize = 8)
+            plt.setp(ax.get_xticklabels(),rotation='vertical',fontsize = 6)
+            plt.setp(ax.get_yticklabels(),rotation='horizontal',fontsize = 6)
             plt.grid(True)
 
             plt.savefig(str(savefilename)+'.png', dpi=300)
@@ -1599,8 +1599,8 @@ def plot_v_usage( handle, chain, savefilename="Vusage", order="frequency"):
             ax.set_ylabel('Frequency', fontsize = 10)
             ax.set_xticks(ind+1*width)
             ax.set_xticklabels(gene_list_v)
-            plt.setp(ax.get_xticklabels(),rotation='vertical',fontsize = 8)
-            plt.setp(ax.get_yticklabels(),rotation='horizontal',fontsize = 8)
+            plt.setp(ax.get_xticklabels(),rotation='vertical',fontsize = 6)
+            plt.setp(ax.get_yticklabels(),rotation='horizontal',fontsize = 6)
             plt.grid(True)
 
             plt.savefig(str(savefilename)+'.png', dpi=300)
@@ -1661,8 +1661,8 @@ def plot_v_usage( handle, chain, savefilename="Vusage", order="frequency"):
             ax.set_ylabel('Frequency', fontsize = 10)
             ax.set_xticks(ind+1*width)
             ax.set_xticklabels(gene_list_v)
-            plt.setp(ax.get_xticklabels(),rotation='vertical',fontsize = 8)
-            plt.setp(ax.get_yticklabels(),rotation='horizontal',fontsize = 8)
+            plt.setp(ax.get_xticklabels(),rotation='vertical',fontsize = 6)
+            plt.setp(ax.get_yticklabels(),rotation='horizontal',fontsize = 6)
             plt.grid(True)
 
             plt.savefig(str(savefilename)+'.png', dpi=300)
@@ -1723,8 +1723,8 @@ def plot_v_usage( handle, chain, savefilename="Vusage", order="frequency"):
             ax.set_ylabel('Frequency', fontsize = 10)
             ax.set_xticks(ind+1*width)
             ax.set_xticklabels(gene_list_v)
-            plt.setp(ax.get_xticklabels(),rotation='vertical',fontsize = 8)
-            plt.setp(ax.get_yticklabels(),rotation='horizontal',fontsize = 8)
+            plt.setp(ax.get_xticklabels(),rotation='vertical',fontsize = 6)
+            plt.setp(ax.get_yticklabels(),rotation='horizontal',fontsize = 6)
             plt.grid(True)
 
             plt.savefig(str(savefilename)+'.png', dpi=300)
@@ -1800,8 +1800,8 @@ def plot_j_usage( handle, chain="beta", savefilename="Jusage", order="frequency"
             ax.set_ylabel('Frequency', fontsize = 10)
             ax.set_xticks(ind+width)
             ax.set_xticklabels(gene_list_j)
-            plt.setp(ax.get_xticklabels(),rotation='vertical',fontsize = 8)
-            plt.setp(ax.get_yticklabels(),rotation='horizontal',fontsize = 8)
+            plt.setp(ax.get_xticklabels(),rotation='vertical',fontsize = 6)
+            plt.setp(ax.get_yticklabels(),rotation='horizontal',fontsize = 6)
             plt.grid(True)
 
             plt.savefig(str(savefilename)+'.png', dpi=300)
@@ -1860,8 +1860,8 @@ def plot_j_usage( handle, chain="beta", savefilename="Jusage", order="frequency"
             ax.set_ylabel('Frequency', fontsize = 10)
             ax.set_xticks(ind+width)
             ax.set_xticklabels(gene_list_j)
-            plt.setp(ax.get_xticklabels(),rotation='vertical',fontsize = 8)
-            plt.setp(ax.get_yticklabels(),rotation='horizontal',fontsize = 8)
+            plt.setp(ax.get_xticklabels(),rotation='vertical',fontsize = 6)
+            plt.setp(ax.get_yticklabels(),rotation='horizontal',fontsize = 6)
             plt.grid(True)
 
             plt.savefig(str(savefilename)+'.png', dpi=300)
@@ -1923,8 +1923,8 @@ def plot_j_usage( handle, chain="beta", savefilename="Jusage", order="frequency"
             ax.set_ylabel('Frequency', fontsize = 10)
             ax.set_xticks(ind+width)
             ax.set_xticklabels(gene_list_j)
-            plt.setp(ax.get_xticklabels(),rotation='vertical',fontsize = 8)
-            plt.setp(ax.get_yticklabels(),rotation='horizontal',fontsize = 8)
+            plt.setp(ax.get_xticklabels(),rotation='vertical',fontsize = 6)
+            plt.setp(ax.get_yticklabels(),rotation='horizontal',fontsize = 6)
             plt.grid(True)
 
             plt.savefig(str(savefilename)+'.png', dpi=300)
@@ -1986,8 +1986,8 @@ def plot_j_usage( handle, chain="beta", savefilename="Jusage", order="frequency"
             ax.set_ylabel('Frequency', fontsize = 10)
             ax.set_xticks(ind+width)
             ax.set_xticklabels(gene_list_j)
-            plt.setp(ax.get_xticklabels(),rotation='vertical',fontsize = 8)
-            plt.setp(ax.get_yticklabels(),rotation='horizontal',fontsize = 8)
+            plt.setp(ax.get_xticklabels(),rotation='vertical',fontsize = 6)
+            plt.setp(ax.get_yticklabels(),rotation='horizontal',fontsize = 6)
             plt.grid(True)
 
             plt.savefig(str(savefilename)+'.png', dpi=300)
