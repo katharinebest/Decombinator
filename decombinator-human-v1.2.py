@@ -179,6 +179,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                         if get_v_deletions( record.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record.seq, j_match, temp_start_j, j_regions ):
                             [ end_v, deletions_v] = get_v_deletions( record.seq, v_match, temp_end_v, v_regions )
                             f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j]))
+                            print >> results_file, f_seq
                             assigned_count += 1
                             found_seq_match = 1
                     elif found_v_match == 1 and found_j_match == 1:
