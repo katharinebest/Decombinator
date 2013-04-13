@@ -2298,8 +2298,8 @@ def plot_insert_lengths( handle, savefilename="InsertLengths" ):
 
 ## Adaptation for running as an interactive command-line tool
     
-print 'Welcome to DeCombinatoR v1.1 written and maintained by: -'
-
+print 'Welcome to DeCombinatoR written and maintained by: -'
+print ''
 print 'Niclas Thomas'
 print 'James Heather'
 print 'Wilfred Ndifon'
@@ -2369,7 +2369,7 @@ elif platform.system() == 'Darwin':
 try:
     analysis( filestoanalyse, newpath+str(name_results), str(chain), with_statistics=True, with_reverse_complement_search=rc, omitN=True)
 except:
-    print 'DeCombinatoR v1.1 encountered an unexpected error while plotting your results.'
+    print 'DeCombinatoR encountered an unexpected error while analysing your file.'
     print 'If the problem persists, please contact niclas.thomas@gmail.com'
 
 seqs_found = 0
@@ -2398,7 +2398,7 @@ else:
             print newpath
             print ''
         except:
-            print 'DeCombinatoR v1.1 encountered an unexpected error while plotting your results.'
+            print 'DeCombinatoR encountered an unexpected error while plotting your results.'
             print 'If the problem persists, please contact niclas.thomas@gmail.com'
 
     choose_extras = raw_input('Would you like to use the extra functionality of DeCombinatoR to create additional files containing distinct clones and translated TcR sequences. Enter (y/n): ')
@@ -2446,7 +2446,7 @@ else:
                 print ''
 
         except:
-            print 'DeCombinatoR v1.1 encountered an unexpected error while using its extra functionality.'
+            print 'DeCombinatoR encountered an unexpected error while using its extra functionality.'
             print 'If the problem persists, please contact niclas.thomas@gmail.com'
         
 raw_input('Press Enter to exit...')
