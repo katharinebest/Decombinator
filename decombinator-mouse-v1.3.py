@@ -88,7 +88,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
 
         ###############
         ## Open .txt file created at the start of analysis
-        stemplate = Template('$v $j $del_v $del_j $nt_insert') # Creates stemplate, a holder, for f. Each line will have the 5 variables separated by a space
+        stemplate = Template('$v $j $del_v $del_j $nt_insert $seqid') # Creates stemplate, a holder, for f. Each line will have the 5 variables separated by a space
 
         ###############
         ## Begin analysing sequences
@@ -164,21 +164,22 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
 
                     if hold_v and hold_j:
                         if get_v_deletions( record.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record.seq, j_match, temp_start_j, j_regions ):
-                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j]))
+                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
+                           
                             print >> results_file, f_seq # Write to results_file (text file) the classification of the sequence
                             assigned_count += 1
                             found_seq_match = 1
                     elif hold_v and found_j_match == 1:
                         if get_v_deletions( record.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record.seq, j_match, temp_start_j, j_regions ):
                             [ start_j, deletions_j] = get_j_deletions( record.seq, j_match, temp_start_j, j_regions )
-                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j]))
+                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                             print >> results_file, f_seq
                             assigned_count += 1
                             found_seq_match = 1
                     elif found_v_match == 1 and hold_j:
                         if get_v_deletions( record.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record.seq, j_match, temp_start_j, j_regions ):
                             [ end_v, deletions_v] = get_v_deletions( record.seq, v_match, temp_end_v, v_regions )
-                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j]))
+                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                             print >> results_file, f_seq
                             assigned_count += 1
                             found_seq_match = 1
@@ -186,7 +187,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                         if get_v_deletions( record.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record.seq, j_match, temp_start_j, j_regions ):
                             [ end_v, deletions_v] = get_v_deletions( record.seq, v_match, temp_end_v, v_regions )
                             [ start_j, deletions_j] = get_j_deletions( record.seq, j_match, temp_start_j, j_regions )
-                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j]))
+                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                             print >> results_file, f_seq
                             assigned_count += 1
                             found_seq_match = 1
@@ -255,21 +256,21 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
 
                         if hold_v and hold_j:
                             if get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions ):
-                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j]))
+                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                                 print >> results_file, f_seq # Write to results_file (text file) the classification of the sequence
                                 assigned_count += 1
                                 found_seq_match = 1
                         elif hold_v and found_j_match == 1:
                             if get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions ):
                                 [ start_j, deletions_j] = get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions )
-                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j]))
+                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                                 print >> results_file, f_seq
                                 assigned_count += 1
                                 found_seq_match = 1
                         elif found_v_match == 1 and hold_j:
                             if get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions ):
                                 [ end_v, deletions_v] = get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions )
-                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j]))
+                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                                 print >> results_file, f_seq
                                 assigned_count += 1
                                 found_seq_match = 1
@@ -277,7 +278,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                             if get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions ):
                                 [ end_v, deletions_v] = get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions )
                                 [ start_j, deletions_j] = get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions )
-                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j]))
+                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                                 print >> results_file, f_seq
                                 assigned_count += 1
                                 found_seq_match = 1
@@ -359,7 +360,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
 
         ###############
         ## Open .txt file created at the start of analysis
-        stemplate = Template('$v $j $del_v $del_j $nt_insert') # Creates stemplate, a holder, for f. Each line will have the 5 variables separated by a space
+        stemplate = Template('$v $j $del_v $del_j $nt_insert $seqid') # Creates stemplate, a holder, for f. Each line will have the 5 variables separated by a space
 
         ###############
         ## Begin analysing sequences
@@ -435,21 +436,21 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
 
                     if hold_v and hold_j:
                         if get_v_deletions( record.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record.seq, j_match, temp_start_j, j_regions ):
-                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j]))
+                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                             print >> results_file, f_seq # Write to results_file (text file) the classification of the sequence
                             assigned_count += 1
                             found_seq_match = 1
                     elif hold_v and found_j_match == 1:
                         if get_v_deletions( record.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record.seq, j_match, temp_start_j, j_regions ):
                             [ start_j, deletions_j] = get_j_deletions( record.seq, j_match, temp_start_j, j_regions )
-                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j]))
+                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                             print >> results_file, f_seq
                             assigned_count += 1
                             found_seq_match = 1
                     elif found_v_match == 1 and hold_j:
                         if get_v_deletions( record.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record.seq, j_match, temp_start_j, j_regions ):
                             [ end_v, deletions_v] = get_v_deletions( record.seq, v_match, temp_end_v, v_regions )
-                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j]))
+                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                             print >> results_file, f_seq
                             assigned_count += 1
                             found_seq_match = 1
@@ -457,7 +458,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                         if get_v_deletions( record.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record.seq, j_match, temp_start_j, j_regions ):
                             [ end_v, deletions_v] = get_v_deletions( record.seq, v_match, temp_end_v, v_regions )
                             [ start_j, deletions_j] = get_j_deletions( record.seq, j_match, temp_start_j, j_regions )
-                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j]))
+                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                             print >> results_file, f_seq
                             assigned_count += 1
                             found_seq_match = 1
@@ -526,21 +527,21 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
 
                         if hold_v and hold_j:
                             if get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions ):
-                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j]))
+                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                                 print >> results_file, f_seq # Write to results_file (text file) the classification of the sequence
                                 assigned_count += 1
                                 found_seq_match = 1
                         elif hold_v and found_j_match == 1:
                             if get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions ):
                                 [ start_j, deletions_j] = get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions )
-                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j]))
+                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                                 print >> results_file, f_seq
                                 assigned_count += 1
                                 found_seq_match = 1
                         elif found_v_match == 1 and hold_j:
                             if get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions ):
                                 [ end_v, deletions_v] = get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions )
-                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j]))
+                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                                 print >> results_file, f_seq
                                 assigned_count += 1
                                 found_seq_match = 1
@@ -548,7 +549,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                             if get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions ):
                                 [ end_v, deletions_v] = get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions )
                                 [ start_j, deletions_j] = get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions )
-                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j]))
+                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                                 print >> results_file, f_seq
                                 assigned_count += 1
                                 found_seq_match = 1
@@ -630,7 +631,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
 
         ###############
         ## Open .txt file created at the start of analysis
-        stemplate = Template('$v $j $del_v $del_j $nt_insert') # Creates stemplate, a holder, for f. Each line will have the 5 variables separated by a space
+        stemplate = Template('$v $j $del_v $del_j $nt_insert $seqid') # Creates stemplate, a holder, for f. Each line will have the 5 variables separated by a space
 
         ###############
         ## Begin analysing sequences
@@ -706,21 +707,21 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
 
                     if hold_v and hold_j:
                         if get_v_deletions( record.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record.seq, j_match, temp_start_j, j_regions ):
-                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j]))
+                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                             print >> results_file, f_seq # Write to results_file (text file) the classification of the sequence
                             assigned_count += 1
                             found_seq_match = 1
                     elif hold_v and found_j_match == 1:
                         if get_v_deletions( record.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record.seq, j_match, temp_start_j, j_regions ):
                             [ start_j, deletions_j] = get_j_deletions( record.seq, j_match, temp_start_j, j_regions )
-                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j]))
+                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                             print >> results_file, f_seq
                             assigned_count += 1
                             found_seq_match = 1
                     elif found_v_match == 1 and hold_j:
                         if get_v_deletions( record.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record.seq, j_match, temp_start_j, j_regions ):
                             [ end_v, deletions_v] = get_v_deletions( record.seq, v_match, temp_end_v, v_regions )
-                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j]))
+                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                             print >> results_file, f_seq
                             assigned_count += 1
                             found_seq_match = 1
@@ -728,7 +729,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                         if get_v_deletions( record.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record.seq, j_match, temp_start_j, j_regions ):
                             [ end_v, deletions_v] = get_v_deletions( record.seq, v_match, temp_end_v, v_regions )
                             [ start_j, deletions_j] = get_j_deletions( record.seq, j_match, temp_start_j, j_regions )
-                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j]))
+                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                             print >> results_file, f_seq
                             assigned_count += 1
                             found_seq_match = 1
@@ -797,21 +798,21 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
 
                         if hold_v and hold_j:
                             if get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions ):
-                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j]))
+                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                                 print >> results_file, f_seq # Write to results_file (text file) the classification of the sequence
                                 assigned_count += 1
                                 found_seq_match = 1
                         elif hold_v and found_j_match == 1:
                             if get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions ):
                                 [ start_j, deletions_j] = get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions )
-                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j]))
+                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                                 print >> results_file, f_seq
                                 assigned_count += 1
                                 found_seq_match = 1
                         elif found_v_match == 1 and hold_j:
                             if get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions ):
                                 [ end_v, deletions_v] = get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions )
-                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j]))
+                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                                 print >> results_file, f_seq
                                 assigned_count += 1
                                 found_seq_match = 1
@@ -819,7 +820,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                             if get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions ):
                                 [ end_v, deletions_v] = get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions )
                                 [ start_j, deletions_j] = get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions )
-                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j]))
+                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                                 print >> results_file, f_seq
                                 assigned_count += 1
                                 found_seq_match = 1
@@ -901,7 +902,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
 
         ###############
         ## Open .txt file created at the start of analysis
-        stemplate = Template('$v $j $del_v $del_j $nt_insert') # Creates stemplate, a holder, for f. Each line will have the 5 variables separated by a space
+        stemplate = Template('$v $j $del_v $del_j $nt_insert $seqid') # Creates stemplate, a holder, for f. Each line will have the 5 variables separated by a space
 
         ###############
         ## Begin analysing sequences
@@ -977,7 +978,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
 
                     if hold_v and hold_j:
                         if get_v_deletions( record.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record.seq, j_match, temp_start_j, j_regions ):
-                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j]))
+                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                             print >> results_file, f_seq # Write to results_file (text file) the classification of the sequence
                             assigned_count += 1
                             found_seq_match = 1
@@ -985,14 +986,14 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                     elif hold_v and found_j_match == 1:
                         if get_v_deletions( record.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record.seq, j_match, temp_start_j, j_regions ):
                             [ start_j, deletions_j] = get_j_deletions( record.seq, j_match, temp_start_j, j_regions )
-                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j]))
+                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                             print >> results_file, f_seq
                             assigned_count += 1
                             found_seq_match = 1
                     elif found_v_match == 1 and hold_j:
                         if get_v_deletions( record.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record.seq, j_match, temp_start_j, j_regions ):
                             [ end_v, deletions_v] = get_v_deletions( record.seq, v_match, temp_end_v, v_regions )
-                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j]))
+                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                             print >> results_file, f_seq
                             assigned_count += 1
                             found_seq_match = 1
@@ -1000,7 +1001,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                         if get_v_deletions( record.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record.seq, j_match, temp_start_j, j_regions ):
                             [ end_v, deletions_v] = get_v_deletions( record.seq, v_match, temp_end_v, v_regions )
                             [ start_j, deletions_j] = get_j_deletions( record.seq, j_match, temp_start_j, j_regions )
-                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j]))
+                            f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                             print >> results_file, f_seq
                             assigned_count += 1
                             found_seq_match = 1
@@ -1069,21 +1070,23 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
 
                         if hold_v and hold_j:
                             if get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions ):
-                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j]))
+                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                                 print >> results_file, f_seq # Write to results_file (text file) the classification of the sequence
                                 assigned_count += 1
                                 found_seq_match = 1
+                                print record_reverse.seq
+                                print deletions_v, deletions_j
                         elif hold_v and found_j_match == 1:
                             if get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions ):
                                 [ start_j, deletions_j] = get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions )
-                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j]))
+                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                                 print >> results_file, f_seq
                                 assigned_count += 1
                                 found_seq_match = 1
                         elif found_v_match == 1 and hold_j:
                             if get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions ):
                                 [ end_v, deletions_v] = get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions )
-                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j]))
+                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                                 print >> results_file, f_seq
                                 assigned_count += 1
                                 found_seq_match = 1
@@ -1091,7 +1094,7 @@ def analysis( Sequence_Reads, results, chain, with_statistics=True, with_reverse
                             if get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions ) and get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions ):
                                 [ end_v, deletions_v] = get_v_deletions( record_reverse.seq, v_match, temp_end_v, v_regions )
                                 [ start_j, deletions_j] = get_j_deletions( record_reverse.seq, j_match, temp_start_j, j_regions )
-                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j]))
+                                f_seq = stemplate.substitute( v = str(v_match)+str(','), j = str(j_match)+str(','), del_v = str(deletions_v)+str(','), del_j = str(deletions_j)+str(','), nt_insert = str(record_reverse.seq[end_v+1:start_j])+str(','), seqid = str(record.id))
                                 print >> results_file, f_seq
                                 assigned_count += 1
                                 found_seq_match = 1
@@ -1301,11 +1304,18 @@ def get_translated_sequences( handle, handle_results, chain, with_outframe=False
             elements = line.rstrip("\n")
             classifier = elements.split(',')
 
-            v = int(classifier[0])
-            j = int(classifier[1])
-            delv = int(classifier[2])
-            delj = int(classifier[3])
-            ins = str(classifier[4].replace(' ',''))
+            if len(classifier) == 6:
+                v = int(classifier[0])
+                j = int(classifier[1])
+                delv = int(classifier[2])
+                delj = int(classifier[3])
+                ins = str(classifier[4].replace(' ',''))
+            elif len(classifier) == 5:
+                v = int(classifier[0])
+                j = int(classifier[1])
+                delv = int(classifier[2])
+                delj = int(classifier[3])
+                ins = ''
 
             if delv != 0:
                 used_v = va_regions[v][:-delv]
@@ -1344,11 +1354,18 @@ def get_translated_sequences( handle, handle_results, chain, with_outframe=False
             elements = line.rstrip("\n")
             classifier = elements.split(',')
 
-            v = int(classifier[0])
-            j = int(classifier[1])
-            delv = int(classifier[2])
-            delj = int(classifier[3])
-            ins = str(classifier[4].replace(' ',''))
+            if len(classifier) == 6:
+                v = int(classifier[0])
+                j = int(classifier[1])
+                delv = int(classifier[2])
+                delj = int(classifier[3])
+                ins = str(classifier[4].replace(' ',''))
+            elif len(classifier) == 5:
+                v = int(classifier[0])
+                j = int(classifier[1])
+                delv = int(classifier[2])
+                delj = int(classifier[3])
+                ins = ''
 
             if delv != 0:
                 used_v = vb_regions[v][:-delv]
@@ -1387,11 +1404,18 @@ def get_translated_sequences( handle, handle_results, chain, with_outframe=False
             elements = line.rstrip("\n")
             classifier = elements.split(',')
 
-            v = int(classifier[0])
-            j = int(classifier[1])
-            delv = int(classifier[2])
-            delj = int(classifier[3])
-            ins = str(classifier[4].replace(' ',''))
+            if len(classifier) == 6:
+                v = int(classifier[0])
+                j = int(classifier[1])
+                delv = int(classifier[2])
+                delj = int(classifier[3])
+                ins = str(classifier[4].replace(' ',''))
+            elif len(classifier) == 5:
+                v = int(classifier[0])
+                j = int(classifier[1])
+                delv = int(classifier[2])
+                delj = int(classifier[3])
+                ins = ''
 
             if delv != 0:
                 used_v = vg_regions[v][:-delv]
@@ -1430,11 +1454,18 @@ def get_translated_sequences( handle, handle_results, chain, with_outframe=False
             elements = line.rstrip("\n")
             classifier = elements.split(',')
 
-            v = int(classifier[0])
-            j = int(classifier[1])
-            delv = int(classifier[2])
-            delj = int(classifier[3])
-            ins = str(classifier[4].replace(' ',''))
+            if len(classifier) == 6:
+                v = int(classifier[0])
+                j = int(classifier[1])
+                delv = int(classifier[2])
+                delj = int(classifier[3])
+                ins = str(classifier[4].replace(' ',''))
+            elif len(classifier) == 5:
+                v = int(classifier[0])
+                j = int(classifier[1])
+                delv = int(classifier[2])
+                delj = int(classifier[3])
+                ins = ''
 
             if delv != 0:
                 used_v = vd_regions[v][:-delv]
