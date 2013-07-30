@@ -2298,8 +2298,8 @@ def plot_insert_lengths( handle, savefilename="InsertLengths" ):
         elements = line.rstrip("\n")
 
         classifier = elements.split(',')
-        if len(classifier) == 5:
-            insert_lengths[len(classifier[4].replace(' ',''))] += 1
+        if len(classifier) == 6:
+            insert_lengths[len(classifier[5].replace(' ',''))] += 1
         else:
             insert_lengths[0] += 1
 
