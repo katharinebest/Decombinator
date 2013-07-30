@@ -2299,7 +2299,7 @@ def plot_insert_lengths( handle, savefilename="InsertLengths" ):
 
         classifier = elements.split(',')
         if len(classifier) == 6:
-            insert_lengths[len(classifier[5].replace(' ',''))] += 1
+            insert_lengths[len(classifier[4].replace(' ',''))] += 1
         else:
             insert_lengths[0] += 1
 
